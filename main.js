@@ -11,22 +11,45 @@ $(document).ready(function(){
     var start_date = '2018-01-01';
     var start_moment = moment(start_date);
 
-    //quanti giorni ha il mese da visualizzare
-    var days_of_month = start_moment.daysInMonth();
-    var text_month = start_moment.format('MMMM');
-    text_month = text_month.charAt(0).toUpperCase() + text_month.slice(1);
+    display_month(start_moment);
 
-    //popolo dinaminamente il mese che appare come titolo
-    $('#current_month').text(text_month);
+    //intercetto il click sul button next_month
+    $('#next_month').click(function(){
+        //devo aggiungere 1 al mese corrente per passare al mese successivo
+        start_moment.add(1, 'months');
+        //devo visualizzare il calendario aggiornato
+        display_month(start_moment);
+    });
 
-    //ciclo for per stampare/appendere i giorni uno ad uno
-    for (var i = 1; i <= days_of_month; i++) {
-        console.log(i + ' ' + text_month);
-        //uso template per appendere giorno corrente in html
-        var context = {
-            'day': i + ' ' + text_month
-        };
-        var html_finale = template_function(context);
-        $('#calendario').append(html_finale);
-    }
+    //intercetto il click sul button prev_month
+    $('#prev_month').click(function(){
+        //devo sottrarre 1 al mese corrente per passare al mese precedente
+        start_moment.subtract(1, 'months');
+        //devo visualizzare il calendario aggiornato
+        display_month(start_moment);
+    });
+
+    //funzione per stampare i giorni del mese da visualizzare
+    function display_month(data_moment){
+        //svuoto il calendario
+        $('#calendario').empty();
+        //quanti giorni ha il mese da visualizzare
+        var days_of_month = data_moment.daysInMonth();
+        var text_month = data_moment.format('MMMM');
+        text_month = text_month.charAt(0).toUpperCase() + text_month.slice(1);
+
+        //popolo dinaminamente il mese che appare come titolo
+        $('#current_month').text(text_month);
+
+        //ciclo for per stampare i giorni del mese
+        for (var i = 1; i <= days_of_month; i++) {
+            console.log(i + ' ' + text_month);
+            //uso template per appendere giorno corrente in html
+            var context = {
+                'day': i + ' ' + text_month
+            };
+            var html_finale = template_function(context);
+            $('#calendario').append(html_finale);
+        }
+    };
 });

@@ -8,7 +8,16 @@ body {
 }
 header {
     text-align: center;
-    margin: 50px 0;
+    margin: 50px 0 30px;
+}
+
+header::after {
+    display: inline-block;
+    content: '';
+    width: 380px;
+    height: 2px;
+    background-color: #3737c4;
+    margin-top: 30px;
 }
 
 h1 {
@@ -21,10 +30,11 @@ h1 {
     background-color: transparent;
     font-size: 25px;
     color: #3737c4;
+    padding: 20px;
 }
 
 #current_month {
-    margin: 0 25px;
+    margin: 0 10px;
     font-size: 30px;
     color: #3737c4;
 }
