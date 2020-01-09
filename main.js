@@ -14,7 +14,12 @@ $(document).ready(function(){
         //Controllare se il mese è valido (!= da dic 2018)
         //leggo il mese corrente
         var current_month = $('#current_month').text();
-        console.log(current_month);
+        console.log('mese corrente: ' + current_month);
+        if (current_month == 'Gennaio') {
+            //fai comparire button prev
+            $('#prev_month').show();
+        }
+        //se mi trovo su dicembre
         if (current_month == 'Dicembre') {
             alert('non puoi andare avanti');
             //fai scomparire icona next
@@ -34,10 +39,17 @@ $(document).ready(function(){
         if (current_month == 'Dicembre') {
             $('#next_month').show();
         }
-        //devo sottrarre 1 al mese corrente per passare al mese precedente
-        start_moment.subtract(1, 'months');
-        //devo visualizzare il calendario aggiornato
-        display_month(start_moment);
+        //se mi trovo su gennaio
+        if (current_month == 'Gennaio') {
+            alert('non puoi andare indietro');
+            //fai scomparire icona prev
+            $('#prev_month').hide();
+        } else {
+            //devo sottrarre 1 al mese corrente per passare al mese precedente
+            start_moment.subtract(1, 'months');
+            //devo visualizzare il calendario aggiornato
+            display_month(start_moment);
+        }
     });
 
     //funzione per stampare i giorni del mese da visualizzare
