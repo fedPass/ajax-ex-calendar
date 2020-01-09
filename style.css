@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+header {
+    text-align: center;
+    margin: 50px 0;
+}
+
+h1 {
+    padding-bottom: 20px;
+}
+
+#next_month,
+#prev_month {
+    border: none;
+    background-color: transparent;
+    font-size: 25px;
+    color: #3737c4;
+}
+
+#current_month {
+    margin: 0 25px;
+    font-size: 30px;
+    color: #3737c4;
+}
+
+#calendario li {
+    margin: 15px 0;
+    list-style-type: none;
+    text-align: center;
+}
+
+#calendario li.festa {
+    color: red;
+}

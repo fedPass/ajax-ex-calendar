@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Calendario 2018</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/it.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1>Calendario 2018</h1>
+            <div class="month_nav">
+                <button id="next_month"><i class="fas fa-arrow-alt-circle-left"></i></button>
+                <strong id="current_month">Gennaio</strong>
+                <button id="prev_month"><i class="fas fa-arrow-alt-circle-right"></i></button>
+            </div>
+        </header>
+        <main>
+            <ul id="calendario"></ul>
+        </main>
+
+        <script id="day-template" type="text/x-handlebars-template">
+            <li>{{ day }}</li>
+        </script>
+
+        <script src="main.js" charset="utf-8"></script>
+    </body>
+</html>
