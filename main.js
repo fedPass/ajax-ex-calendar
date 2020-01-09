@@ -29,6 +29,10 @@ $(document).ready(function(){
     function display_month(data_moment){
         //svuoto il calendario
         $('#calendario').empty();
+
+        //clono l'oggetto moment per usarlo per il data-day
+        var date = data_moment.clone();
+
         //quanti giorni ha il mese da visualizzare
         var days_of_month = data_moment.daysInMonth();
         var text_month = data_moment.format('MMMM');
@@ -39,15 +43,17 @@ $(document).ready(function(){
         //popolo dinaminamente il mese che appare come titolo
         $('#current_month').text(text_month);
 
-        //ciclo for per stampare i giorni del mese
+        //ciclo for per stampare i giorni del mese e data-day
         for (var i = 1; i <= days_of_month; i++) {
             console.log(i + ' ' + text_month + ' ' + year);
-            //uso template per appendere giorno corrente in html
+            //uso template per appendere giorno corrente in html e data-day ad ogni giorno
             var context = {
-                'day': i + ' ' + text_month
+                'day': i + ' ' + text_month,
+                'date': date.format('YYYY-MM-DD')
             };
             var html_finale = template_function(context);
             $('#calendario').append(html_finale);
+            date.add(1, 'days');
         }
         display_holiday(start_moment);
     };
