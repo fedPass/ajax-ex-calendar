@@ -68,7 +68,18 @@ $(document).ready(function(){
                 'month': data_moment.month()
             },
             'success': function(data){
-                console.log(data);
+                //mi restituisce un array con le festività mensili
+                var holidays = data.response;
+                console.log(holidays);
+                //scorro l'array delle festività
+                for (var i = 0; i < holidays.length; i++) {
+                    //prendi la data della festività
+                    var holiday_date = holidays[i].date;
+                    //prendi il nome della festività
+                    var holiday_name = holidays[i].name;
+                    console.log(holiday_date);
+                    console.log(holiday_name);
+                }
             },
             'error': function(data){
                 alert('error');
