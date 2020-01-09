@@ -14,7 +14,10 @@ $(document).ready(function(){
     //quanti giorni ha il mese da visualizzare
     var days_of_month = start_moment.daysInMonth();
     var text_month = start_moment.format('MMMM');
-    console.log(days_of_month);
+    text_month = text_month.charAt(0).toUpperCase() + text_month.slice(1);
+
+    //popolo dinaminamente il mese che appare come titolo
+    $('#current_month').text(text_month);
 
     //ciclo for per stampare/appendere i giorni uno ad uno
     for (var i = 1; i <= days_of_month; i++) {
