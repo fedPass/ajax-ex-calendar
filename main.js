@@ -72,7 +72,7 @@ $(document).ready(function(){
 
         //ciclo for per stampare i giorni del mese e data-day
         for (var i = 1; i <= days_of_month; i++) {
-            console.log(i + ' ' + text_month + ' ' + year);
+            // console.log(i + ' ' + text_month + ' ' + year);
             //uso template per appendere giorno corrente in html e data-day ad ogni giorno
             var context = {
                 'day': i + ' ' + text_month,
@@ -97,15 +97,13 @@ $(document).ready(function(){
             'success': function(data){
                 //mi restituisce un array con le festività mensili
                 var holidays = data.response;
-                console.log(holidays);
                 //scorro l'array delle festività
                 for (var i = 0; i < holidays.length; i++) {
                     //prendi la data della festività
                     var holiday_date = holidays[i].date;
                     //prendi il nome della festività
                     var holiday_name = holidays[i].name;
-                    console.log(holiday_date);
-                    console.log(holiday_name);
+                    console.log(holiday_date + ' : ' + holiday_name);
                     //controllo se la data è uguale a data-id
                     //aggiungo classe vacation
                     //append il nome della festività
