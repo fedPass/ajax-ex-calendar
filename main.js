@@ -79,6 +79,10 @@ $(document).ready(function(){
                     var holiday_name = holidays[i].name;
                     console.log(holiday_date);
                     console.log(holiday_name);
+                    //controllo se la data è uguale a data-id
+                    //aggiungo classe vacation
+                    //append il nome della festività
+                    $('#calendario li[data-day="'+ holiday_date +'"]').addClass('vacation').append(' - ' + holiday_name);
                 }
             },
             'error': function(data){
