@@ -1,8 +1,4 @@
 $(document).ready(function(){
-
-    //es. API holiday per Gennaio
-    //https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0
-
     //predispondo le variabili per i template
     var template_html = $('#day-template').html();
     var template_function = Handlebars.compile(template_html);
@@ -36,6 +32,8 @@ $(document).ready(function(){
         //quanti giorni ha il mese da visualizzare
         var days_of_month = data_moment.daysInMonth();
         var text_month = data_moment.format('MMMM');
+        var month = data_moment.month();
+        var year = data_moment.year();
         text_month = text_month.charAt(0).toUpperCase() + text_month.slice(1);
 
         //popolo dinaminamente il mese che appare come titolo
@@ -43,7 +41,7 @@ $(document).ready(function(){
 
         //ciclo for per stampare i giorni del mese
         for (var i = 1; i <= days_of_month; i++) {
-            console.log(i + ' ' + text_month);
+            console.log(i + ' ' + text_month + ' ' + year);
             //uso template per appendere giorno corrente in html
             var context = {
                 'day': i + ' ' + text_month
@@ -51,5 +49,22 @@ $(document).ready(function(){
             var html_finale = template_function(context);
             $('#calendario').append(html_finale);
         }
+
+        //chiamata ajax per recuperare le festività
+        //https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0
+        $.ajax({
+            'url': 'https://flynn.boolean.careers/exercises/api/holidays',
+            'method': 'GET',
+            'data': {
+                'year': year,
+                'month': month
+            },
+            'success': function(data){
+                console.log(data);
+            },
+            'error': function(data){
+                alert('error');
+            }
+        });
     };
 });
