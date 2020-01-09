@@ -49,15 +49,17 @@ $(document).ready(function(){
             var html_finale = template_function(context);
             $('#calendario').append(html_finale);
         }
+        display_holiday(start_moment);
+    };
 
-        //chiamata ajax per recuperare le festività
-        //https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0
+    //chiamata ajax per recuperare le festività
+    function display_holiday(data_moment) {
         $.ajax({
             'url': 'https://flynn.boolean.careers/exercises/api/holidays',
             'method': 'GET',
             'data': {
-                'year': year,
-                'month': month
+                'year': data_moment.year(),
+                'month': data_moment.month()
             },
             'success': function(data){
                 console.log(data);
@@ -66,5 +68,5 @@ $(document).ready(function(){
                 alert('error');
             }
         });
-    };
+    }
 });
