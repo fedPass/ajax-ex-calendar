@@ -46,7 +46,7 @@ h1 {
 }
 
 #calendario li {
-    margin: 15px 0;
+    margin: 5px 0;
     list-style-type: none;
     padding-left: 125px
 }
@@ -54,4 +54,5 @@ h1 {
 #calendario li.vacation {
     color: #3737c4;
     font-weight: bold;
+    background-color: #70b6f3b5;
 }

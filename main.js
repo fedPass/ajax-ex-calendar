@@ -11,14 +11,29 @@ $(document).ready(function(){
 
     //intercetto il click sul button next_month
     $('#next_month').click(function(){
-        //devo aggiungere 1 al mese corrente per passare al mese successivo
-        start_moment.add(1, 'months');
-        //devo visualizzare il calendario aggiornato
-        display_month(start_moment);
+        //Controllare se il mese è valido (!= da dic 2018)
+        //leggo il mese corrente
+        var current_month = $('#current_month').text();
+        console.log(current_month);
+        if (current_month == 'Dicembre') {
+            alert('non puoi andare avanti');
+            //fai scomparire icona next
+            $('#next_month').hide();
+        } else {
+            //devo aggiungere 1 al mese corrente per passare al mese successivo
+            start_moment.add(1, 'months');
+            //devo visualizzare il calendario aggiornato
+            display_month(start_moment);
+        }
     });
 
     //intercetto il click sul button prev_month
     $('#prev_month').click(function(){
+        //Controllare se il mese è valido
+        var current_month = $('#current_month').text();
+        if (current_month == 'Dicembre') {
+            $('#next_month').show();
+        }
         //devo sottrarre 1 al mese corrente per passare al mese precedente
         start_moment.subtract(1, 'months');
         //devo visualizzare il calendario aggiornato
