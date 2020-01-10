@@ -9,7 +9,7 @@ body {
 
 header {
     text-align: center;
-    width: 700px;
+    width: 1000px;
     margin: 50px auto;
 }
 
@@ -24,6 +24,11 @@ header::after {
 
 h1 {
     padding-bottom: 20px;
+}
+
+.button_container {
+    display: inline-block;
+    width: 65px;
 }
 
 #prev_month {
@@ -43,20 +48,22 @@ h1 {
     margin: 0 10px;
     font-size: 30px;
     color: #3737c4;
+    display: inline-block;
+    width: 150px;
 }
 
 #calendario {
-    width: 700px;
+    width: 1000px;
     display: flex;
     flex-wrap: wrap;
     margin: auto;
 }
 
 #calendario li {
-    width: 100px;
+    width: calc(100% / 7);
     height: 100px;
     border: 1px solid #3737c4;
-    padding: 6px;
+    padding: 10px;
     list-style-type: none;
     font-size: 15px;
 }

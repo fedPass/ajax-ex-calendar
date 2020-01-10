@@ -20,6 +20,7 @@ $(document).ready(function(){
         if (current_month == 'Gennaio') {
             //fai comparire button prev
             $('#prev_month').show();
+
         }
         //se mi trovo su dicembre
         if (current_month == 'Dicembre') {
