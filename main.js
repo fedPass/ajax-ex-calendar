@@ -78,20 +78,8 @@ $(document).ready(function(){
 
         //devo stampare dei li vuoti per i giorni mancanti dall'inizio
         display_empty_block(day_of_week);
-
-        //ciclo for per stampare i giorni del mese e data-day
-        for (var i = 1; i <= days_of_month; i++) {
-            // console.log(i + ' ' + text_month + ' ' + year);
-            //uso template per appendere giorno corrente in html e data-day ad ogni giorno
-            var context = {
-                'day': date.format('ddd') + ' ' + i,
-                'date': date.format('YYYY-MM-DD')
-            };
-            var html_finale = template_function(context);
-            $('#calendario').append(html_finale);
-            //aggiungo un giorno all'oggetto moment che ho clonato
-            date.add(1, 'days');
-        }
+        //devo stampare i giorni
+        display_days(days_of_month, date);
         //richiamo funzione per stampare le festività
         display_holiday(start_moment);
     };
@@ -101,16 +89,33 @@ $(document).ready(function(){
         //se il primo è domenica appendi 6 vuoti
         if (day_position == 0 ) {
             for (var k = 0; k < 6; k++) {
-                $('#calendario').append('<li></li>');
+                $('#calendario').append('<div class="day_box"></div>');
             }
         } else if (2 <= day_position <= 6) {
             for (var j = 0; j < (day_position - 1); j++) {
-                $('#calendario').append('<li></li>');
+                $('#calendario').append('<div class="day_box"></div>');
             }
         }
     }
 
-    //funzione per recuperare le festività
+    //funzione per stampare i giorni
+    function display_days(days_of_month, date) {
+        //ciclo for per stampare i giorni del mese e data-day
+        for (var i = 1; i <= days_of_month; i++) {
+            // console.log(i + ' ' + text_month + ' ' + year);
+            //uso template per appendere giorno corrente in html e data-day ad ogni giorno
+            var context = {
+                'day': i,
+                'date': date.format('YYYY-MM-DD')
+            };
+            var html_finale = template_function(context);
+            $('#calendario').append(html_finale);
+            //aggiungo un giorno all'oggetto moment che ho clonato
+            date.add(1, 'days');
+        }
+    }
+
+    //funzione per stampare le festività
     function display_holiday(data_moment) {
         $.ajax({
             'url': 'https://flynn.boolean.careers/exercises/api/holidays',
@@ -129,7 +134,7 @@ $(document).ready(function(){
                     //prendi il nome della festività
                     var holiday_name = holidays[i].name;
                     //controllo se la data è uguale a data-id, aggiungo classe vacation e append il nome della festività
-                    $('#calendario li[data-day="'+ holiday_date +'"]').addClass('vacation').append('<br>' + holiday_name);
+                    $('.day_box[data-day="'+ holiday_date +'"]').addClass('vacation').append('<span class="holiday">' + holiday_name + '</span>');
                 }
             },
             'error': function(data){

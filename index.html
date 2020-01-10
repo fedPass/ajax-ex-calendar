@@ -23,11 +23,23 @@
             </div>
         </header>
         <main>
-            <ul id="calendario"></ul>
+            <div id="days_label_container">
+                <span>Lunedì</span>
+                <span>Martedì</span>
+                <span>Mercoledì</span>
+                <span>Giovedì</span>
+                <span>Venerdì</span>
+                <span>Sabato</span>
+                <span>Domenica</span>
+            </div>
+            <div id="calendario">
+            </div>
         </main>
 
         <script id="day-template" type="text/x-handlebars-template">
-            <li data-day="{{date}}">{{ day }}</li>
+            <div class="day_box" data-day="{{date}}">
+                <span>{{ day }}</span>
+            </div>
         </script>
 
         <script src="main.js" charset="utf-8"></script>
