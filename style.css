@@ -57,6 +57,9 @@ h1 {
 }
 
 #days_label_container span {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #3737c4;
     display: inline-block;
     width: 139px;
     margin-bottom: 15px;
@@ -84,6 +87,10 @@ h1 {
     color: #3737c4;
     font-weight: bold;
     background-color: #cae6ff;
+}
+
+.day_box.vacation span:last-child {
+    text-align: right;
 }
 
 .holiday {
