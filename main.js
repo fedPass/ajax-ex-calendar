@@ -3,7 +3,7 @@ $(document).ready(function(){
     var template_html = $('#day-template').html();
     var template_function = Handlebars.compile(template_html);
 
-    //predispondo variabili per dati relativi alla data
+    //predispondo la data da cui iniziare
     var start_date = '2018-01-01';
     var start_moment = moment(start_date);
 
@@ -15,7 +15,7 @@ $(document).ready(function(){
         start_moment.add(1, 'months');
         //leggo il mese corrente
         var current_month = $('#current_month').text();
-        console.log('mese corrente: ' + current_month);
+        // console.log('mese corrente: ' + current_month);
         //se clicco e sto su genn
         if (current_month == 'Gennaio') {
             //fai comparire button prev
@@ -37,7 +37,7 @@ $(document).ready(function(){
         //devo sottrarre 1 al mese corrente per passare al mese precedente
         start_moment.subtract(1, 'months');
         var current_month = $('#current_month').text();
-        console.log('mese corrente: ' + current_month);
+        // console.log('mese corrente: ' + current_month);
         if (current_month == 'Dicembre') {
             $('#next_month').show();
         }
@@ -60,29 +60,20 @@ $(document).ready(function(){
         //clono l'oggetto moment per usarlo per il data-day
         var date = data_moment.clone();
         //numero giorni del mese da visualizzare
-        var days_of_month = data_moment.daysInMonth();
+        var days_of_month = date.daysInMonth();
         //mese testuale
-        var text_month = data_moment.format('MMMM');
+        var text_month = date.format('MMMM');
         //giorno della settimana in numero
-        var day_of_week = data_moment.day();
+        var day_of_week = date.day();
         //mese in numero
-        var month = data_moment.month();
+        var month = date.month();
         //anno in numero
-        var year = data_moment.year();
+        var year = date.year();
         text_month = text_month.charAt(0).toUpperCase() + text_month.slice(1);
         //popolo dinaminamente il mese che appare come titolo
         $('#current_month').text(text_month);
         //devo stampare dei li vuoti per i giorni mancanti dall'inizio
-        //se il primo è domenica appendi 6 vuoti
-        if (day_of_week == 0 ) {
-            for (var k = 0; k < 6; k++) {
-                $('#calendario').append('<li></li>');
-            }
-        } else if (2 <= day_of_week <= 6) {
-            for (var j = 0; j < (day_of_week - 1); j++) {
-                $('#calendario').append('<li></li>');
-            }
-        }
+        display_empty_block(day_of_week);
         //ciclo for per stampare i giorni del mese e data-day
         for (var i = 1; i <= days_of_month; i++) {
             // console.log(i + ' ' + text_month + ' ' + year);
@@ -99,6 +90,20 @@ $(document).ready(function(){
         //richiamo funzione per stampare le festività
         display_holiday(start_moment);
     };
+
+    //funzione per stampare blocchi vuoti ad inizio mese per giorni mancanti
+    function display_empty_block(day_position) {
+        //se il primo è domenica appendi 6 vuoti
+        if (day_position == 0 ) {
+            for (var k = 0; k < 6; k++) {
+                $('#calendario').append('<li></li>');
+            }
+        } else if (2 <= day_position <= 6) {
+            for (var j = 0; j < (day_position - 1); j++) {
+                $('#calendario').append('<li></li>');
+            }
+        }
+    }
 
     //funzione per recuperare le festività
     function display_holiday(data_moment) {
@@ -118,10 +123,7 @@ $(document).ready(function(){
                     var holiday_date = holidays[i].date;
                     //prendi il nome della festività
                     var holiday_name = holidays[i].name;
-                    console.log(holiday_date + ' : ' + holiday_name);
-                    //controllo se la data è uguale a data-id
-                    //aggiungo classe vacation
-                    //append il nome della festività
+                    //controllo se la data è uguale a data-id, aggiungo classe vacation e append il nome della festività
                     $('#calendario li[data-day="'+ holiday_date +'"]').addClass('vacation').append(' - ' + holiday_name);
                 }
             },
